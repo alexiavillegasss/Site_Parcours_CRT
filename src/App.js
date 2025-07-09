@@ -1,26 +1,29 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import CarteMentaleCRT from './CarteMentaleCRT'; // Ton composant carte mentale
-import Home from './Home'; // Page d'accueil ou autre composant principal
+import PageAccueil from './pages/PageAccueil';
+import Informer from './pages/Informer';
+import ListeDispositifs from './pages/ListeDispositifs';
+import CarteMentaleCRT from './pages/CarteMentaleCRT';
+import Orienter from './pages/Orienter';
 
 function App() {
   return (
     <Router>
       <div>
-        <nav style={{ background: '#2865b4', padding: '10px' }}>
-          <ul style={{ display: 'flex', gap: '20px', listStyle: 'none', margin: 0, padding: 0 }}>
-            <li>
-              <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Accueil</Link>
-            </li>
-            <li>
-              <Link to="/morienter/dispositifs" style={{ color: 'white', textDecoration: 'none' }}>Dispositifs</Link>
-            </li>
-          </ul>
+        {/* Barre de navigation */}
+        <nav style={{ background: '#2563eb', padding: '10px' }}>
+          <Link to="/" style={{ color: 'white', marginRight: '20px' }}>Accueil</Link>
+          <Link to="/minformer" style={{ color: 'white', marginRight: '20px' }}>M'informer</Link>
+          <Link to="/morienter" style={{ color: 'white', marginRight: '20px' }}>M’orienter</Link>
+          <Link to="/parcourstype" style={{ color: 'white' }}>Mon parcours type</Link>
         </nav>
 
+        {/* Contenu des routes */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/morienter/dispositifs" element={<CarteMentaleCRT />} />
+          <Route path="/" element={<PageAccueil />} />
+          <Route path="/minformer" element={<Informer />} />
+          <Route path="/dispositifs" element={<ListeDispositifs />} />
+          <Route path="/dispositifs/crt" element={<CarteMentaleCRT />} />
+          <Route path="/morienter" element={<Orienter />} />
         </Routes>
       </div>
     </Router>

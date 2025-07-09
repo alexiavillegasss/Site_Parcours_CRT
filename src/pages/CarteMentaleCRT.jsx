@@ -10,7 +10,7 @@ import ReactFlow, {
   useReactFlow
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import './App.css';
+import '../App.css';
 
 // Les données initiales de la carte
 const initialNodes = [
