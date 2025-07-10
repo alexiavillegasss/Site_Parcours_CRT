@@ -1,33 +1,52 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import PageAccueil from './pages/PageAccueil';
 import Informer from './pages/Informer';
+import Orienter from './pages/Orienter';
+import ListeStructures from './pages/ListeStructures';
 import ListeDispositifs from './pages/ListeDispositifs';
 import CarteMentaleCRT from './pages/CarteMentaleCRT';
-import Orienter from './pages/Orienter';
+import MorienterForm from './pages/MorienterForm';
+import CarteMentaleEHPAD from './pages/CarteMentaleEHPAD'
 
-function App() {
+
+
+
+function Layout() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
-    <Router>
-      <div>
-        {/* Barre de navigation */}
+    <div>
+      {/* Barre de navigation affichée uniquement si on n’est PAS sur la page d’accueil */}
+      {!isHome && (
         <nav style={{ background: '#2563eb', padding: '10px' }}>
-          <Link to="/" style={{ color: 'white', marginRight: '20px' }}>Accueil</Link>
-          <Link to="/minformer" style={{ color: 'white', marginRight: '20px' }}>M'informer</Link>
-          <Link to="/morienter" style={{ color: 'white', marginRight: '20px' }}>M’orienter</Link>
-          <Link to="/parcourstype" style={{ color: 'white' }}>Mon parcours type</Link>
+          <a href="/minformer" style={{ color: 'white', marginRight: '20px' }}>M'informer</a>
+          <a href="/morienter" style={{ color: 'white', marginRight: '20px' }}>M’orienter</a>
+          <a href="/parcourstype" style={{ color: 'white' }}>Mon parcours type</a>
         </nav>
+      )}
 
-        {/* Contenu des routes */}
-        <Routes>
-          <Route path="/" element={<PageAccueil />} />
-          <Route path="/minformer" element={<Informer />} />
-          <Route path="/dispositifs" element={<ListeDispositifs />} />
-          <Route path="/dispositifs/crt" element={<CarteMentaleCRT />} />
-          <Route path="/morienter" element={<Orienter />} />
-        </Routes>
-      </div>
-    </Router>
+      <Routes>
+        <Route path="/" element={<PageAccueil />} />
+        <Route path="/minformer" element={<Informer />} />
+        <Route path="/structures" element={<ListeStructures />} />
+        <Route path="/dispositifs" element={<ListeDispositifs />} />
+        <Route path="/dispositifs/crt" element={<CarteMentaleCRT />} />
+        <Route path="/morienter" element={<MorienterForm />} />
+        <Route path="/structures/ehpad" element={<CarteMentaleEHPAD />} />
+        
+
+
+        {/* Ajoute ici "parcourstype" plus tard si tu as une page */}
+      </Routes>
+    </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <Layout />
+    </Router>
+  );
+}

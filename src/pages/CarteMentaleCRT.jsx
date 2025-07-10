@@ -93,7 +93,7 @@ const childrenMap = {
       id: 'CR-2a',
       data: {
         label: 'Visualisez le compte rendu de votre CRT',
-        url: 'CR-PV.PDF',
+        url: '/cr_pv.pdf',
       },
       style: { background: '#fef08a', borderRadius: 10 },
       position: { x: 0, y: 0 },
@@ -105,7 +105,7 @@ const childrenMap = {
       id: 'équip-2b',
       data: {
         label: "Visualisez l'équipe de votre CRT",
-        url: 'equip-PV.pdf',
+        url: '/equip_pv.pdf',
       },
       style: { background: '#fef08a', borderRadius: 10 },
       position: { x: 0, y: 0 },
@@ -117,7 +117,7 @@ const childrenMap = {
       id: 'info-flyer-2c',
       data: {
         label: '📄 Voir le flyer explicatif',
-        url: 'Plaquette_CRT_PV_1.pdf',
+        url: '/Plaquette_felix_pey.pdf',
       },
       style: { background: '#a2d7ff', borderRadius: 10 },
       position: { x: 0, y: 0 },
@@ -127,7 +127,7 @@ const childrenMap = {
       id: 'info-ppt-2c',
       data: {
         label: '📄 Voir le Powerpoint explicatif',
-        url: 'ppt présentation CRT PV.pdf',
+        url: '/ppt_presentation_CRT_Felix_Pey.pdf',
       },
       style: { background: '#a2d7ff', borderRadius: 10 },
       position: { x: 0, y: 0 },
@@ -582,5 +582,7 @@ function CarteMentaleCRT() {
     </div>
   );
 }
+
+
 
 export default CarteMentaleCRT;
