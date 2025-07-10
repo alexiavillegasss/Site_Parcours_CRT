@@ -22,14 +22,14 @@ const initialNodes = [
   },
   {
     id: '2',
-    data: { label: 'Qu est ce quune EHPAD ?' },
+    data: { label: "Qu est ce qu'un EHPAD ?" },
     position: { x: 550, y: 200 },
     style: { background: '#fca5a5', borderRadius: 10 },
     parent: '1'
   },
   {
     id: '3',
-    data: { label: 'Trouver une EHPAD dans votre secteur' },
+    data: { label: 'Trouver un EHPAD dans votre secteur' },
     position: { x: 850, y: 200 },
     style: { background: '#fca5a5', borderRadius: 10 },
     parent: '1'
@@ -84,7 +84,7 @@ const childrenMap = {
       {
         id: '3b',
         data: {
-          label: 'Trouver l EHPAD la plus proche de chez moi'
+          label: "Trouver l'EHPAD la plus proche de chez moi"
         },
         style: { background: '#bbf7d0', borderRadius: 10, whiteSpace: 'pre-line' },
         position: { x: 0, y: 0 },
@@ -94,14 +94,16 @@ const childrenMap = {
 
     '4': [
       {
-        id: '4a',
-        data: {
-          label: 'CRT : Centre de Ressource Territoriale'
-        },
-        style: { background: '#bbf7d0', borderRadius: 10, whiteSpace: 'pre-line' },
-        position: { x: 0, y: 0 },
-        draggable: false
-      },
+  id: '4a',
+  data: {
+    label: 'CRT : Centre de Ressource Territoriale',
+    url: '/dispositifs/crt' // 🔗 Redirige vers la carte mentale CRT
+  },
+  style: { background: '#bbf7d0', borderRadius: 10, whiteSpace: 'pre-line' },
+  position: { x: 0, y: 0 },
+  draggable: false,
+},
+
       {
         id: '4b',
         data: {
@@ -277,7 +279,7 @@ function App() {
         }}
       >
         <img src="/logo-dac.png" alt="Logo DAC Var Ouest" style={{ height: '60px', marginRight: '20px' }} />
-        <h1 style={{ fontSize: 26, fontWeight: 600, color: '#0c4a6e' }}>Les missions des CRT du Var Ouest</h1>
+        <h1 style={{ fontSize: 26, fontWeight: 600, color: '#0c4a6e' }}>Les missions des EHPAD du Var Ouest</h1>
       </header>
 
       <div
@@ -288,7 +290,7 @@ function App() {
           textAlign: 'center',
         }}
       >
-        Cette carte mentale retrace les missions principales des Centres de Ressources Territoriaux (CRT) du Var Ouest, leurs volets d'action et documents associés.
+        Cette carte mentale retrace les missions principales des EHPAD (Établissement d'Hébergement pour Personnes Âgées Dépendantes) du Var Ouest, leurs volets d'action et documents associés.
       </div>
 
       <ReactFlowProvider>
