@@ -359,6 +359,25 @@ function afficherQuestion(noeud) {
     });
     container.appendChild(ficheBtn);
 
+      if (crt) {
+  const boutonCRT = document.createElement("a");
+  boutonCRT.href = "/dispositifs/crt";
+  boutonCRT.target = "_blank";
+  boutonCRT.textContent = "Qu'est ce qu'un CRT ?";
+  boutonCRT.style.display = "inline-block";
+  boutonCRT.style.marginTop = "20px";
+  boutonCRT.style.backgroundColor = "#58c1db";
+  boutonCRT.style.color = "white";
+  boutonCRT.style.padding = "10px 15px";
+  boutonCRT.style.borderRadius = "8px";
+  boutonCRT.style.fontWeight = "bold";
+  boutonCRT.style.textDecoration = "none";
+  boutonCRT.style.float = "right"; // Positionné à droite
+  boutonCRT.style.clear = "both";
+
+  container.appendChild(boutonCRT);
+}
+
     const restart = document.createElement("button");
     restart.textContent = "🏠 Recommencer";
     restart.onclick = retourAccueil;
@@ -500,5 +519,3 @@ function genererFichePatient(commune, orientation, structureHtml, reponsesUtilis
   // Sauvegarde
   doc.save(`fiche_patient_${identifiant}.pdf`);
 }
-
-
