@@ -104,7 +104,7 @@ const arbrePA = {
               <h3>Siège départemental à Draguignan</h3>
               <details>
               <summary><strong>📍Adresse du siège et informations</strong></summary>
-              <p><u>Structure :</u> Siège départemental de Draguignant</p>
+              <p><u>Structure :</u> Siège départemental de Draguignan</p>
                 <p>
                   📍 412 rue jean Aicard, 83300 Draguignan<br>
                   ☎️ 04 98 10 56 00

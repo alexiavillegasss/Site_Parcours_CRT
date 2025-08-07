@@ -422,12 +422,19 @@ function FlowWrapper() {
   const [expandedNodes, setExpandedNodes] = useState({});
   const reactFlowInstance = useReactFlow();
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      reactFlowInstance.fitView({ padding: 0.3, includeHiddenNodes: true });
-    }, 100);
-    return () => clearTimeout(timeout);
-  }, []);
+ useEffect(() => {
+  if (!reactFlowInstance) return;
+
+  const timeout = setTimeout(() => {
+    reactFlowInstance.fitView({
+      padding: 0.3,
+      includeHiddenNodes: true,
+    });
+  }, 100);
+
+  return () => clearTimeout(timeout);
+}, [reactFlowInstance]);
+
 
   const handleNodeClick = useCallback((event, node) => {
     if (node.data?.url) {

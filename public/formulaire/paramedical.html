@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulaire Paramédical</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .form-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .pro-list {
+      background: #e0f2fe;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-left: 4px solid #3b82f6;
+      border-radius: 6px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>🩺 Formulaire Paramédical</h1>
+
+    <form id="form-medical">
+      <div id="questionnaire"></div>
+      <div id="resultat" class="pro-list" style="display: none;"></div>
+    </form>
+  </div>
+
+<script>
+  const questions = [
+    { id: "13", label: "Adaptation du logement", pro: ["Ergothérapeute"] },
+    { id: "10", label: "Troubles de l’audition", pro: ["Audioprothésiste"] },
+    { id: "12", label: "Besoin de canne, fauteuil, orthèse", pro: ["Orthoprothésiste"] },
+    { id: "3a", label: "Chute", pro: ["Kinésithérapeute", "Ergothérapeute"] },
+    { id: "7", label: "Difficultés alimentaires ou suivi nutritionnel", pro: ["Diététicien"] },
+    { id: "2", label: "Difficultés à se déplacer, s’habiller, se laver", pro: ["Infirmier", "Ergothérapeute"] },
+    { id: "1c", label: "Injections", pro: ["Infirmier"] },
+    { id: "6a", label: "Troubles de la mémoire", pro: ["Orthophoniste", "Neuropsychologue"] },
+    { id: "6b", label: "Troubles du langage", pro: ["Orthophoniste", "Neuropsychologue"] },
+    { id: "6c", label: "Troubles de la voix", pro: ["Orthophoniste", "Neuropsychologue"] },
+    { id: "9", label: "Fatigue visuelle, troubles de la vue", pro: ["Orthoptiste"] },
+    { id: "3c", label: "Fracture", pro: ["Kinésithérapeute", "Ergothérapeute"] },
+    { id: "1b", label: "Pansements", pro: ["Infirmier"] },
+    { id: "1a", label: "Plaies", pro: ["Infirmier"] },
+    { id: "11", label: "Soins des pieds (notamment en cas de diabète)", pro: ["Pédicure-podologue"] },
+    { id: "8", label: "Soutien psychologique", pro: ["Psychologue"] },
+    { id: "4", label: "Troubles de l’équilibre", pro: ["Kinésithérapeute", "Psychomotricien"] },
+    { id: "5", label: "Troubles de la déglutition", pro: ["Orthophoniste"] },
+    { id: "3b", label: "AVC", pro: ["Kinésithérapeute", "Ergothérapeute"] }
+  ];
+
+  // Trier les questions par ordre alphabétique du label
+  questions.sort((a, b) => a.label.localeCompare(b.label));
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const formContainer = document.getElementById("questionnaire");
+    const resultat = document.getElementById("resultat");
+
+    questions.forEach(q => {
+      const div = document.createElement("div");
+      div.className = "form-group";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = "q" + q.id;
+      checkbox.value = q.id;
+
+      const label = document.createElement("label");
+      label.htmlFor = "q" + q.id;
+      label.innerText = " " + q.label;
+
+      checkbox.addEventListener("change", updateProfessionnels);
+
+      div.appendChild(checkbox);
+      div.appendChild(label);
+      formContainer.appendChild(div);
+    });
+
+    function updateProfessionnels() {
+      const checked = Array.from(formContainer.querySelectorAll("input[type=checkbox]:checked"))
+        .map(el => el.value);
+
+      const pros = new Set();
+      checked.forEach(id => {
+        const q = questions.find(q => q.id === id);
+        if (q) {
+          q.pro.forEach(p => pros.add(p));
+        }
+      });
+
+      if (pros.size === 0) {
+        resultat.style.display = "none";
+        resultat.innerHTML = "";
+      } else {
+        resultat.style.display = "block";
+        resultat.innerHTML = "<strong>Professionnels à contacter :</strong><ul>" +
+          Array.from(pros).map(p => `<li>${p}</li>`).join("") +
+          "</ul>";
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

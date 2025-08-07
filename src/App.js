@@ -1,15 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import PageAccueil from './pages/PageAccueil';
 import Informer from './pages/Informer';
-import Orienter from './pages/Orienter';
+//import Orienter from './pages/Orienter';
 import ListeStructures from './pages/ListeStructures';
 import ListeDispositifs from './pages/ListeDispositifs';
 import CarteMentaleCRT from './pages/CarteMentaleCRT';
 import MorienterForm from './pages/MorienterForm';
-import CarteMentaleEHPAD from './pages/CarteMentaleEHPAD'
-
-
-
+import CarteMentaleEHPAD from './pages/CarteMentaleEHPAD';
 
 function Layout() {
   const location = useLocation();
@@ -32,11 +29,9 @@ function Layout() {
         <Route path="/structures" element={<ListeStructures />} />
         <Route path="/dispositifs" element={<ListeDispositifs />} />
         <Route path="/dispositifs/crt" element={<CarteMentaleCRT />} />
-        <Route path="/morienter" element={<MorienterForm />} />
         <Route path="/structures/ehpad" element={<CarteMentaleEHPAD />} />
-        
-
-
+        <Route path="/morienter" element={<MorienterForm />} />
+        <Route path="/morienter/dispositifs/crt" element={<CarteMentaleCRT />} />
         {/* Ajoute ici "parcourstype" plus tard si tu as une page */}
       </Routes>
     </div>

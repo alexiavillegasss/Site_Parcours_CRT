@@ -30,7 +30,7 @@ function PageAccueil() {
           M’informer
         </button>
         <button
-          onClick={() => navigate('/morienter')}
+          onClick={() => window.location.href = '/formulaire/type_parcours.html'}
           style={{ backgroundColor: '#fb5338', padding: '12px 24px', border: 'none', borderRadius: '10px', fontWeight: 'bold', color: 'white', cursor: 'pointer' }}
         >
           M’orienter

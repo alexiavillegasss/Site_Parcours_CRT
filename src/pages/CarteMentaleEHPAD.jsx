@@ -132,16 +132,19 @@ const childrenMap = {
 
    const reactFlowInstance = useReactFlow();
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      reactFlowInstance.fitView({
-        padding: 0.3,       // ajoute un peu d’espace autour
-        includeHiddenNodes: true
-      });
-    }, 100); // léger délai pour que tous les éléments soient rendus
+useEffect(() => {
+  if (!reactFlowInstance) return;
 
-    return () => clearTimeout(timeout);
-  }, []);
+  const timeout = setTimeout(() => {
+    reactFlowInstance.fitView({
+      padding: 0.3,
+      includeHiddenNodes: true,
+    });
+  }, 100);
+
+  return () => clearTimeout(timeout);
+}, [reactFlowInstance]);
+
 
 
   const handleNodeClick = useCallback(

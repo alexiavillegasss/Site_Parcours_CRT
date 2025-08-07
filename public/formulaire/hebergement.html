@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parcours Hébergement</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .choice-buttons {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+    .choice-buttons button {
+      min-width: 250px;
+      margin: 0.5rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .results {
+      background: #e0f2fe;
+      padding: 1rem;
+      border-left: 4px solid #3b82f6;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Quel type d'hébergement recherchez-vous ?</h1>
+
+    <div class="choice-buttons">
+      <button onclick="afficherStructures('temporaire')">Hébergement temporaire</button>
+      <button onclick="afficherStructures('permanent')">Hébergement permanent</button>
+    </div>
+
+    <div id="resultats" class="results" style="display: none;"></div>
+
+    <button onclick="window.location.href='type_parcours.html'" style="margin-top: 2rem;">
+      ⬅️ Retour
+    </button>
+  </div>
+
+  <script>
+    function afficherStructures(type) {
+      const resultat = document.getElementById("resultats");
+      resultat.style.display = "block";
+
+      if (type === 'temporaire') {
+        resultat.innerHTML = `
+          <strong>Structures d’hébergement temporaire :</strong>
+          <ul>
+            <li>HTU (Hébergement Temporaire d’Urgence)</li>
+            <li>HT (Hébergement Temporaire)</li>
+          </ul>
+        `;
+      } else if (type === 'permanent') {
+        resultat.innerHTML = `
+          <strong>Structures d’hébergement permanent :</strong>
+          <ul>
+            <li>Résidence autonomie (GIR 4)</li>
+            <li>EHPAD</li>
+            <li>Résidence service senior</li>
+          </ul>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
