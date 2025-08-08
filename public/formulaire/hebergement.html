@@ -16,13 +16,12 @@
     }
 
     .choice-buttons {
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
 
     .choice-buttons button {
       min-width: 250px;
@@ -40,6 +39,12 @@
       margin-top: 1.5rem;
       text-align: left;
     }
+
+    select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -51,6 +56,13 @@
       <button onclick="afficherStructures('permanent')">Hébergement permanent</button>
     </div>
 
+    <div id="permanent-zone" style="display: none;">
+      <label for="commune-select"><strong>Choisissez la commune :</strong></label><br>
+      <select id="commune-select" onchange="afficherEHPAD()">
+        <option value="">-- Sélectionnez une commune --</option>
+      </select>
+    </div>
+
     <div id="resultats" class="results" style="display: none;"></div>
 
     <button onclick="window.location.href='type_parcours.html'" style="margin-top: 2rem;">
@@ -59,11 +71,22 @@
   </div>
 
   <script>
+    let data = [];
+
+    fetch('communes_structures.json')
+      .then(response => response.json())
+      .then(json => {
+        data = json;
+        remplirCommunesEnOrdreAlphabetique();
+      });
+
     function afficherStructures(type) {
       const resultat = document.getElementById("resultats");
+      const zoneCommune = document.getElementById("permanent-zone");
       resultat.style.display = "block";
 
       if (type === 'temporaire') {
+        zoneCommune.style.display = "none";
         resultat.innerHTML = `
           <strong>Structures d’hébergement temporaire :</strong>
           <ul>
@@ -72,14 +95,57 @@
           </ul>
         `;
       } else if (type === 'permanent') {
+        zoneCommune.style.display = "block";
         resultat.innerHTML = `
-          <strong>Structures d’hébergement permanent :</strong>
-          <ul>
-            <li>Résidence autonomie (GIR 4)</li>
-            <li>EHPAD</li>
-            <li>Résidence service senior</li>
-          </ul>
+          <strong>Veuillez sélectionner une commune pour voir l’EHPAD correspondant.</strong>
         `;
+      }
+    }
+
+    function remplirCommunesEnOrdreAlphabetique() {
+      const select = document.getElementById("commune-select");
+      select.innerHTML = '<option value="">-- Sélectionnez une commune --</option>';
+
+      const communes = data
+        .filter(entry => entry.structures.length > 0)
+        .map(entry => entry.commune)
+        .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+
+      communes.forEach(commune => {
+        const option = document.createElement("option");
+        option.value = commune;
+        option.textContent = commune;
+        select.appendChild(option);
+      });
+    }
+
+    function afficherEHPAD() {
+      const select = document.getElementById("commune-select");
+      const communeChoisie = select.value;
+      const resultat = document.getElementById("resultats");
+
+      const communeData = data.find(c => c.commune === communeChoisie);
+      if (!communeData) {
+        resultat.innerHTML = "Commune non trouvée.";
+        return;
+      }
+
+      const ehpads = communeData.structures.filter(s => s.type === "EHPAD");
+
+      if (ehpads.length === 0) {
+        resultat.innerHTML = `<strong>Aucun EHPAD trouvé pour cette commune.</strong>`;
+      } else {
+        let html = `<strong>EHPAD dans la commune de ${communeChoisie} :</strong><ul>`;
+        ehpads.forEach(e => {
+          html += `<li>
+            <strong>${e.nom}</strong><br>
+            ${e.adresse}<br>
+            📞 ${e.telephone}<br>
+            📧 ${e.mail}
+          </li><br>`;
+        });
+        html += `</ul>`;
+        resultat.innerHTML = html;
       }
     }
   </script>
